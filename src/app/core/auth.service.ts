@@ -19,7 +19,7 @@ const EXPIRES_AT_KEY = 'expires_at';
 export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
-  private readonly loginUrl = `/api/accounting/auth/login`;
+  private readonly loginUrl = `/api/accounting/v1/auth/login`;
 
   login(email: string, password: string) {
     return this.http

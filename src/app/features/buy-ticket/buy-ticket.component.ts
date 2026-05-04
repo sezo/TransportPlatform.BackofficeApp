@@ -87,7 +87,7 @@ interface BuyTicketResponse {
 
           <!-- Action Buttons -->
           <div class="action-buttons">
-            <button class="btn btn-primary" 
+            <button class="btn btn-primary"
                     (click)="buyTicket()"
                     [disabled]="!seatNumberInput || purchasing()"
                     [class.btn-loading]="purchasing()">
@@ -362,7 +362,7 @@ export class BuyTicketComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    this.http.get<Route[]>('/api/ticketing/routes').subscribe({
+    this.http.get<Route[]>('/api/ticketing/v1/routes').subscribe({
       next: (routes) => {
         this.routes.set(routes);
         this.loading.set(false);
@@ -404,7 +404,7 @@ export class BuyTicketComponent implements OnInit {
       seatNumber
     };
 
-    this.http.post<BuyTicketResponse>('/api/ticketing/tickets', request).subscribe({
+    this.http.post<BuyTicketResponse>('/api/ticketing/v1/tickets', request).subscribe({
       next: (response) => {
         this.successMessage.set(response.ticketId);
         this.purchasing.set(false);

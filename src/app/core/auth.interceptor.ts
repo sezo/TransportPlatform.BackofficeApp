@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
 
-const SKIP_AUTH_URLS = ['/api/accounting/auth/login', '/api/accounting/auth/register'];
+const SKIP_AUTH_URLS = ['/api/accounting/v1/auth/login', '/api/accounting/v1/auth/register'];
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (SKIP_AUTH_URLS.some(url => req.url.includes(url))) {
