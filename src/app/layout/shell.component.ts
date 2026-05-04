@@ -20,6 +20,9 @@ import { AuthService } from '../core/auth.service';
           <a class="nav-link" routerLink="/tickets" routerLinkActive="active">
             <i class="bi bi-ticket-perforated"></i> Tickets
           </a>
+          <a class="nav-link" routerLink="/buy-ticket" routerLinkActive="active">
+            <i class="bi bi-credit-card"></i> Buy Ticket
+          </a>
           <a class="nav-link" routerLink="/customers" routerLinkActive="active">
             <i class="bi bi-people"></i> Customers
           </a>

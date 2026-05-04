@@ -10,6 +10,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'tickets', loadComponent: () => import('./features/tickets/tickets.component').then(m => m.TicketsComponent) },
+      { path: 'buy-ticket', loadComponent: () => import('./features/buy-ticket/buy-ticket.component').then(m => m.BuyTicketComponent) },
       { path: 'customers', loadComponent: () => import('./features/customers/customers.component').then(m => m.CustomersComponent) },
     ]
   },
