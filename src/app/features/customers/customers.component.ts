@@ -131,7 +131,7 @@ export class CustomersComponent implements OnInit {
     this.loading.set(true);
     let params = new HttpParams().set('page', this.page).set('pageSize', this.pageSize);
     if (this.filterEmail) params = params.set('customerEmail', this.filterEmail);
-    this.http.get<PagedResult>('/api/reporting/reports/tickets', { params }).subscribe({
+    this.http.get<PagedResult>('/api/reporting/v1/reports/tickets', { params }).subscribe({
       next: r => {
         const map = new Map<string, CustomerRow>();
         for (const t of r.items) {

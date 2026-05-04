@@ -160,7 +160,7 @@ export class TicketsComponent implements OnInit {
     if (this.filterEmail)  params = params.set('customerEmail', this.filterEmail);
     if (this.filterRoute)  params = params.set('routeName', this.filterRoute);
     if (this.filterStatus) params = params.set('status', this.filterStatus);
-    this.http.get<PagedResult>('/api/reporting/reports/tickets', { params }).subscribe({
+    this.http.get<PagedResult>('/api/reporting/v1/reports/tickets', { params }).subscribe({
       next:  r => { this.tickets.set(r.items); this.total.set(r.totalCount); this.loading.set(false); },
       error: () => this.loading.set(false)
     });
