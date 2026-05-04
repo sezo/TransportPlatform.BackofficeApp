@@ -14,8 +14,7 @@ interface Route {
 
 interface BuyTicketRequest {
   routeId: string;
-  seatColumn: number;
-  seatRow: number;
+  seatNumber: number;
 }
 
 interface BuyTicketResponse {
@@ -72,22 +71,16 @@ interface BuyTicketResponse {
 
             <div class="seat-grid">
               <div class="seat-input-group">
-                <label for="seatRow">Row:</label>
-                <input type="number" id="seatRow" class="form-control" 
-                       [(ngModel)]="rowInput" [disabled]="purchasing()"
-                       min="1" max="20" />
-              </div>
-              <div class="seat-input-group">
-                <label for="seatColumn">Column:</label>
-                <input type="number" id="seatColumn" class="form-control" 
-                       [(ngModel)]="colInput" [disabled]="purchasing()"
-                       min="1" max="4" />
+                <label for="seatNumber">Seat number:</label>
+                <input type="number" id="seatNumber" class="form-control"
+                       [(ngModel)]="seatNumberInput" [disabled]="purchasing()"
+                       min="1" max="100" />
               </div>
             </div>
 
             <div class="seat-preview">
-              <div *ngIf="rowInput && colInput" class="preview-text">
-                Selected: Row <strong>{{ rowInput }}</strong>, Seat <strong>{{ colInput }}</strong>
+              <div *ngIf="seatNumberInput" class="preview-text">
+                Selected: Seat <strong>{{ seatNumberInput }}</strong>
               </div>
             </div>
           </div>
@@ -96,7 +89,7 @@ interface BuyTicketResponse {
           <div class="action-buttons">
             <button class="btn btn-primary" 
                     (click)="buyTicket()"
-                    [disabled]="!rowInput || !colInput || purchasing()"
+                    [disabled]="!seatNumberInput || purchasing()"
                     [class.btn-loading]="purchasing()">
               <span *ngIf="!purchasing()">
                 <i class="bi bi-credit-card"></i> Buy Ticket
@@ -355,8 +348,7 @@ export class BuyTicketComponent implements OnInit {
 
   routes = signal<Route[]>([]);
   selectedRoute = signal<string | null>(null);
-  rowInput: number | null = null;
-  colInput: number | null = null;
+  seatNumberInput: number | null = null;
   loading = signal(true);
   error = signal<string | null>(null);
   purchasing = signal(false);
@@ -386,24 +378,21 @@ export class BuyTicketComponent implements OnInit {
   selectRoute(route: Route) {
     this.selectedRoute.set(route.id);
     this.successMessage.set(null);
-    this.rowInput = null;
-    this.colInput = null;
+    this.seatNumberInput = null;
   }
 
   clearSelection() {
     this.selectedRoute.set(null);
-    this.rowInput = null;
-    this.colInput = null;
+    this.seatNumberInput = null;
     this.successMessage.set(null);
   }
 
   buyTicket() {
     const routeId = this.selectedRoute();
-    const row = this.rowInput;
-    const column = this.colInput;
+    const seatNumber = this.seatNumberInput;
 
-    if (!routeId || !row || !column) {
-      this.error.set('Please select a route and seat.');
+    if (!routeId || !seatNumber) {
+      this.error.set('Please select a route and seat number.');
       return;
     }
 
@@ -412,8 +401,7 @@ export class BuyTicketComponent implements OnInit {
 
     const request: BuyTicketRequest = {
       routeId,
-      seatRow: row,
-      seatColumn: column
+      seatNumber
     };
 
     this.http.post<BuyTicketResponse>('/api/ticketing/tickets', request).subscribe({
