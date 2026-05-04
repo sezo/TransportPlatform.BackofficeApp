@@ -1,0 +1,16 @@
+name: transport_backoffice
+
+services:
+  backoffice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    networks:
+      - transport-net
+    restart: unless-stopped
+
+networks:
+  transport-net:
+    external: true

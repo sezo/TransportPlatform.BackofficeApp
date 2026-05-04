@@ -1,0 +1,60 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --sidebar-width: 240px;
+  --topbar-height: 56px;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f8f9fb;
+  color: #1e293b;
+}
+
+// Sidebar link active state
+.nav-link.active {
+  background: rgba(255,255,255,0.15) !important;
+  color: #fff !important;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+// Badge overrides
+.badge-confirmed { background: #dcfce7; color: #15803d; }
+.badge-cancelled { background: #fee2e2; color: #b91c1c; }
+.badge-pending   { background: #fef9c3; color: #a16207; }
+
+table thead th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #64748b;
+  border-bottom: 2px solid #e2e8f0 !important;
+  white-space: nowrap;
+}
+
+table td {
+  vertical-align: middle;
+  font-size: 13.5px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+table tbody tr:hover td {
+  background: #f8faff;
+}
+
+.page-header {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 20px;
+}
